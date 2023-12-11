@@ -1,3 +1,20 @@
+from sklearn.cluster import KMeans
+
+import numpy as np
+import pandas as pd
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.set_style("darkgrid")
+
+fd = pd.read_csv('Mall_Customers.csv')
+
+fd.head()
+
+
+
+
+
 fd = fd.filter(["Annual Income (k$)", "Spending Score (1-100)"], axis = 1)
 
 wcss = []
@@ -14,5 +31,14 @@ plt.ylabel('WCSS')
 plt.show()
 
 
+sns.scatterplot(data = fd, x="Annual Income (k$)", y="Spending Score (1-100)", c=["green"])
 
-sns.scatterplot(data = X, x="Annual Income (k$)", y="Spending Score (1-100)", c=["green"])
+
+model = KMeans(n_clusters = 5)
+model.fit(fd)
+
+KMeans(n_clusters=5)
+print(model.cluster_centers_)
+
+sns.scatterplot(data = fd, x= "Annual Income (k$)", y="Spending Score (1-100)", c=model.labels_, cmap= 'rainbow')
+sns.scatterplot(x= model.cluster_centers_[:, 0], y= model.cluster_centers_[:, 1], c= ['black'])
