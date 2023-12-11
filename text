@@ -12,3 +12,7 @@ plt.title('The elbow method')
 plt.xlabel('Number of clussters')
 plt.ylabel('WCSS')
 plt.show()
+
+
+
+sns.scatterplot(data = X, x="Annual Income (k$)", y="Spending Score (1-100)", c=["green"])
